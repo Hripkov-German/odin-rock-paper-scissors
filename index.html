@@ -10,12 +10,36 @@
 
 <body>
     <script>
-        let options = ["Rock", "Paper", "Scissors"];
-        function computerPlay() {
-            let selected = options[Math.floor(Math.random()*3)];
-            return selected;
+        let options = ["rock", "paper", "scissors"];
+        let pc;
+        let player;
+        let roundResult;
+        function getComputerSelection() {
+            pc = options[Math.floor(Math.random() * 3)];
         }
-        document.write(computerPlay());
+        function getPlayerSelection() {
+            player = prompt("Choose one of: rock, paper, scissors.\nCase insensitive.", "").toLowerCase();
+        }
+        function playRound() {
+            if (((pc == "rock") && (player == "scissors")) || ((pc == "paper") && (player == "rock")) || ((pc == "scissors") && (player == "paper"))) {
+                roundResult = "pc";
+            }
+            else if (pc == player) {
+                roundResult = "nobody"
+            }
+            else {
+                roundResult = "player";
+            }
+        }
+        getComputerSelection();
+        getPlayerSelection();
+        playRound();
+        document.write("Pc chose: " + pc);
+        document.write("<br>");
+        document.write("Player chose: " + player);
+        document.write("<br>");
+        document.write("The winner is: " + roundResult);
+
     </script>
 </body>
 
