@@ -11,34 +11,41 @@
 <body>
     <script>
         let options = ["rock", "paper", "scissors"];
-        let pc;
-        let player;
-        let roundResult;
-        function getComputerSelection() {
-            pc = options[Math.floor(Math.random() * 3)];
+
+        function computerPlay() {
+            return pc = options[Math.floor(Math.random() * 3)];
         }
-        function getPlayerSelection() {
-            player = prompt("Choose one of: rock, paper, scissors.\nCase insensitive.", "").toLowerCase();
+
+        function playerPlay() {
+            return player = prompt("Choose one of: rock, paper, scissors.\nCase insensitive.", "").toLowerCase();
         }
-        function playRound() {
-            if (((pc == "rock") && (player == "scissors")) || ((pc == "paper") && (player == "rock")) || ((pc == "scissors") && (player == "paper"))) {
-                roundResult = "pc";
+
+        function roundPlay(pS, cS) {
+            //playerSelection and computerSelection are replaced with pS cS respectively 
+            if (pS == cS) {
+                return "A tie.";
             }
-            else if (pc == player) {
-                roundResult = "nobody"
+            else if ((pS == "rock" && cS == "scissors") || (pS == "paper" && cS == "rock") || (pS == "scissors" && cS == "paper")) {
+                return `Player won. ${pS} beats ${cS}`;
             }
             else {
-                roundResult = "player";
+                return `Pc won because ${cS} beats ${pS}`;
             }
         }
-        getComputerSelection();
-        getPlayerSelection();
-        playRound();
-        document.write("Pc chose: " + pc);
-        document.write("<br>");
-        document.write("Player chose: " + player);
-        document.write("<br>");
-        document.write("The winner is: " + roundResult);
+
+        function repeatRound() {
+            let computerSelection = computerPlay();
+            let playerSelection = playerPlay();
+            document.write("Pc chose: " + computerSelection + ".");
+            document.write("<br>Player chose: " + playerSelection + ".<br>");
+            document.write(roundPlay(playerSelection, computerSelection)+"<br><br>");
+        }
+
+        repeatRound();
+        repeatRound();
+        repeatRound();
+        repeatRound();
+        repeatRound();
 
     </script>
 </body>
