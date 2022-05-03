@@ -11,41 +11,40 @@
 <body>
     <script>
         let options = ["rock", "paper", "scissors"];
-
+        
         function computerPlay() {
             return pc = options[Math.floor(Math.random() * 3)];
         }
-
+        
         function playerPlay() {
             return player = prompt("Choose one of: rock, paper, scissors.\nCase insensitive.", "").toLowerCase();
         }
-
+        
         function roundPlay(pS, cS) {
             //playerSelection and computerSelection are replaced with pS cS respectively 
             if (pS == cS) {
                 return "A tie.";
             }
             else if ((pS == "rock" && cS == "scissors") || (pS == "paper" && cS == "rock") || (pS == "scissors" && cS == "paper")) {
-                return `Player won. ${pS} beats ${cS}`;
+                return `Player won because ${pS} beats ${cS}.`;
             }
             else {
-                return `Pc won because ${cS} beats ${pS}`;
+                return `Pc won because ${cS} beats ${pS}.`;
             }
         }
-
-        function repeatRound() {
+        
+        function game() {
             let computerSelection = computerPlay();
             let playerSelection = playerPlay();
             document.write("Pc chose: " + computerSelection + ".");
             document.write("<br>Player chose: " + playerSelection + ".<br>");
-            document.write(roundPlay(playerSelection, computerSelection)+"<br><br>");
+            document.write(roundPlay(playerSelection, computerSelection) + "<br><br>");
+
         }
 
-        repeatRound();
-        repeatRound();
-        repeatRound();
-        repeatRound();
-        repeatRound();
+        for (let i = 0; i < 5; i++) {
+            game();
+        }
 
     </script>
 </body>
