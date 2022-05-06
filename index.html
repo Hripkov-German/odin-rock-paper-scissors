@@ -9,42 +9,81 @@
 </head>
 
 <body>
+    <div class="button-container">
+        <button class="rock">Rock</button>
+        <button class="paper">Paper</button>
+        <button class="scissors">Scissors</button>
+    </div>
+    <div class="round-results">
+        <p id="pc-choice"></p>
+        <p id="player-choice"></p>
+        <p id="rps-round-result"></p>
+    </div>
+    <div class="running-score">
+        <div class="running-player-score">
+            <p>Player score: </p>
+            <p id="player-score"></p>
+        </div>
+        <div class="running-pc-score">
+            <p>Computer score: </p>
+            <p id="pc-score"></p>
+        </div>
+    </div>
+    <div class="winner-display">
+        <p id="winner"></p>
+    </div>
     <script>
+        let playerScore = 0;
+        let pcScore = 0;
         let options = ["rock", "paper", "scissors"];
-        
+
         function computerPlay() {
             return pc = options[Math.floor(Math.random() * 3)];
         }
-        
-        function playerPlay() {
-            return player = prompt("Choose one of: rock, paper, scissors.\nCase insensitive.", "").toLowerCase();
-        }
-        
-        function roundPlay(pS, cS) {
+
+        function roundResult(pS, cS) {
             //playerSelection and computerSelection are replaced with pS cS respectively 
             if (pS == cS) {
                 return "A tie.";
             }
             else if ((pS == "rock" && cS == "scissors") || (pS == "paper" && cS == "rock") || (pS == "scissors" && cS == "paper")) {
+                playerScore++;
                 return `Player won because ${pS} beats ${cS}.`;
             }
             else {
+                pcScore++;
                 return `Pc won because ${cS} beats ${pS}.`;
             }
         }
-        
-        function game() {
+
+        function winnerCheck(pS, cS) {
+            //playerScore and pcScore are replaced with pS cS respectively 
+            if (pS == 5) {
+                document.getElementById('winner').innerText = "Player wins!";
+            }
+            else if (cS == 5) {
+                document.getElementById('winner').innerText = "Pc wins!";
+            }
+        }
+
+        function roundPlay() {
             let computerSelection = computerPlay();
-            let playerSelection = playerPlay();
-            document.write("Pc chose: " + computerSelection + ".");
-            document.write("<br>Player chose: " + playerSelection + ".<br>");
-            document.write(roundPlay(playerSelection, computerSelection) + "<br><br>");
 
+            document.getElementById('pc-choice').innerText = "Pc chose: " + computerSelection + ".";
+            document.getElementById('player-choice').innerText = "Player chose: " + playerSelection + ".";
+            document.getElementById('rps-round-result').innerText = roundResult(playerSelection, computerSelection);
+            document.getElementById('player-score').innerText = playerScore;
+            document.getElementById('pc-score').innerText = pcScore;
+            winnerCheck(playerScore, pcScore);
         }
 
-        for (let i = 0; i < 5; i++) {
-            game();
-        }
+        const buttons = document.querySelectorAll('button');
+        buttons.forEach((button) => {
+            button.addEventListener('click', () => {
+                playerSelection = button.className;
+                roundPlay();
+            });
+        });
 
     </script>
 </body>
