@@ -2,90 +2,50 @@
 <html lang="en">
 
 <head>
+    <link rel="stylesheet" href="styles.css">
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Rock paper scissors game</title>
 </head>
 
 <body>
-    <div class="button-container">
-        <button class="rock">Rock</button>
-        <button class="paper">Paper</button>
-        <button class="scissors">Scissors</button>
-    </div>
-    <div class="round-results">
-        <p id="pc-choice"></p>
-        <p id="player-choice"></p>
-        <p id="rps-round-result"></p>
-    </div>
-    <div class="running-score">
-        <div class="running-player-score">
-            <p>Player score: </p>
-            <p id="player-score"></p>
+    <div class="content">
+        <div class="info">
+            <h1>Rock, paper and scissors</h1>
+            <h4>playing to the best of 5</h4>
         </div>
-        <div class="running-pc-score">
-            <p>Computer score: </p>
-            <p id="pc-score"></p>
+
+        <div class="running-score">
+            <div class="running-score-computer">
+                <p>Computer score</p>
+                <p id="pc-score">0</p>
+            </div>
+            <div class="running-score-player">
+                <p>Player score</p>
+                <p id="player-score">0</p>
+            </div>
+        </div>
+
+        <div class="last-round-result">
+            <div class="pc-choice">
+                <p>Computer chose</p>
+                <p id="pc-choice"></p>
+            </div>
+            <div class="player-choice">
+                <p>Player chose</p>
+                <p id="player-choice"></p>
+            </div>
+        </div>
+
+        <div class="player-buttons">
+            <button id="rock">Rock</button>
+            <button id="paper">Paper</button>
+            <button id="scissors">Scissors</button>
         </div>
     </div>
-    <div class="winner-display">
-        <p id="winner"></p>
-    </div>
-    <script>
-        let playerScore = 0;
-        let pcScore = 0;
-        let options = ["rock", "paper", "scissors"];
 
-        function computerPlay() {
-            return pc = options[Math.floor(Math.random() * 3)];
-        }
-
-        function roundResult(pS, cS) {
-            //playerSelection and computerSelection are replaced with pS cS respectively 
-            if (pS == cS) {
-                return "A tie.";
-            }
-            else if ((pS == "rock" && cS == "scissors") || (pS == "paper" && cS == "rock") || (pS == "scissors" && cS == "paper")) {
-                playerScore++;
-                return `Player won because ${pS} beats ${cS}.`;
-            }
-            else {
-                pcScore++;
-                return `Pc won because ${cS} beats ${pS}.`;
-            }
-        }
-
-        function winnerCheck(pS, cS) {
-            //playerScore and pcScore are replaced with pS cS respectively 
-            if (pS == 5) {
-                document.getElementById('winner').innerText = "Player wins!";
-            }
-            else if (cS == 5) {
-                document.getElementById('winner').innerText = "Pc wins!";
-            }
-        }
-
-        function roundPlay() {
-            let computerSelection = computerPlay();
-
-            document.getElementById('pc-choice').innerText = "Pc chose: " + computerSelection + ".";
-            document.getElementById('player-choice').innerText = "Player chose: " + playerSelection + ".";
-            document.getElementById('rps-round-result').innerText = roundResult(playerSelection, computerSelection);
-            document.getElementById('player-score').innerText = playerScore;
-            document.getElementById('pc-score').innerText = pcScore;
-            winnerCheck(playerScore, pcScore);
-        }
-
-        const buttons = document.querySelectorAll('button');
-        buttons.forEach((button) => {
-            button.addEventListener('click', () => {
-                playerSelection = button.className;
-                roundPlay();
-            });
-        });
-
-    </script>
+    <script src="script.js"></script>
 </body>
 
 </html>
